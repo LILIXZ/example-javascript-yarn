@@ -9,6 +9,15 @@ on:
   workflow_dispatch: 
 
 jobs:
+  show_ip_address:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get IP Address
+        run: |
+          IP=$(curl -s https://httpbin.org/ip | jq -r '.origin')
+          echo "Current IP Address: $IP"
+        env:
+          JQ_VERSION: 1.6 # You may need to specify the jq version if it's not pre-installed in the GitHub-hosted runner.
   build:
     runs-on: ubuntu-latest
     steps:
